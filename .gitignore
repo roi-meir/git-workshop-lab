@@ -1,0 +1,29 @@
+# Quarto
+.quarto/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# R / RStudio
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+
+# Editors / IDEs (keep repo clean; optional)
+.vscode/
+*.sublime-*
+
+# Logs and temp
+*.log
+*.tmp
+*.temp
+*~
+
+# Optional: uncomment to ignore rendered output (re-render with quarto render)
+# slides/slides.html
+# slides/slides_files/
+# workshop/exercises.html
+# workshop/exercises_files/

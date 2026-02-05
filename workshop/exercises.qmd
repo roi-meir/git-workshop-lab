@@ -1,0 +1,247 @@
+---
+title: "Git Workshop — Hands-on Exercises"
+subtitle: "Do these in order, together"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    theme: cosmo
+    code-block-bg: true
+---
+
+Use this handout **after** the slides. Run every command in a terminal (Git Bash on Windows). Do each part in order; we'll do them together.
+
+::: {.callout-note}
+## IDE option
+Once you're comfortable with the commands, you can do the same workflow from **RStudio** (Git pane) or **VS Code** (Source Control view). The slides cover both; try opening this repo in your IDE and stage/commit from there after we finish the terminal exercises.
+:::
+
+# Part 1 — Setup check
+
+Make sure Git is installed and configured.
+
+**1. Check version**
+
+```bash
+git --version
+```
+
+You should see something like `git version 2.x.x`.
+
+**2. Set your identity (if you haven’t already)**
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+```
+
+**3. Confirm**
+
+```bash
+git config --global --list
+```
+
+You should see `user.name` and `user.email`.
+
+::: {.callout-tip}
+Use the **same email** as your GitHub/GitLab account so commits link to your profile.
+:::
+
+# Part 2 — First repo and first commit
+
+Create a new folder and turn it into a Git repo, then make one commit.
+
+**1. Create a folder and go into it**
+
+```bash
+mkdir my-first-repo
+cd my-first-repo
+```
+
+**2. Initialize a Git repository**
+
+```bash
+git init
+```
+
+You should see: `Initialized empty Git repository in .../my-first-repo/.git`
+
+**3. Create a small file**
+
+```bash
+echo "# My First Repo" > README.md
+```
+
+**4. See what Git sees**
+
+```bash
+git status
+```
+
+You should see `README.md` as "Untracked".
+
+**5. Stage the file**
+
+```bash
+git add README.md
+```
+
+Run `git status` again — the file is now "to be committed".
+
+**6. Commit**
+
+```bash
+git commit -m "Add README"
+```
+
+**7. Look at the history**
+
+```bash
+git log
+```
+
+You should see one commit with your message and your name/email.
+
+::: {.callout-note}
+From now on: **stage** (`git add`) then **commit** (`git commit -m "message"`). Get used to this loop.
+:::
+
+# Part 3 — Remote and push
+
+Put your repo on GitHub or GitLab so you can push and pull.
+
+**1. Create a new repo on the website**
+
+- GitHub: [github.com/new](https://github.com/new) — create an **empty** repo (no README, no .gitignore).
+- GitLab: New project → **Create blank project**.
+
+**2. Copy the repo URL** (HTTPS is fine), e.g. `https://github.com/yourname/my-first-repo.git`
+
+**3. Add the remote** (use your URL)
+
+```bash
+git remote add origin https://github.com/yourname/my-first-repo.git
+```
+
+**4. Push your branch** (first time we set upstream)
+
+```bash
+git branch -M main
+git push -u origin main
+```
+
+You may be asked to log in (browser or token). After that, refresh the repo page — you should see `README.md`.
+
+::: {.callout-warning}
+If your default branch is `master`, `git branch -M main` renames it to `main`. Then `git push -u origin main` pushes that branch and sets `origin/main` as upstream.
+:::
+
+# Part 4 — Branches
+
+Create a branch, make a change, then merge it back.
+
+**1. Create and switch to a new branch**
+
+```bash
+git switch -c add-license
+```
+
+**2. Add a file**
+
+```bash
+echo "MIT License - use freely!" > LICENSE.txt
+git add LICENSE.txt
+git commit -m "Add LICENSE"
+```
+
+**3. Switch back to main**
+
+```bash
+git switch main
+```
+
+**4. Merge the branch**
+
+```bash
+git merge add-license -m "Merge add-license into main"
+```
+
+**5. Check**
+
+```bash
+git log --oneline
+ls
+```
+
+You should see `LICENSE.txt` on `main` and the merge commit in the log.
+
+**6. (Optional) Push to remote**
+
+```bash
+git push
+```
+
+# Part 5 — Simple collaboration (pair exercise)
+
+One person pushes a change; the other pulls and edits the same file, then we resolve a small conflict.
+
+**Setup:** Person A and Person B. Both have access to the same repo (e.g. A owns it, B is collaborator, or use one shared repo).
+
+**Step 1 — Person A**
+
+- Add a line to `README.md`, e.g. "Contributors: Alice"
+- Commit and push:
+
+```bash
+git add README.md
+git commit -m "Add contributor Alice"
+git push
+```
+
+**Step 2 — Person B**
+
+- **Pull first** (to get A’s commit):
+
+```bash
+git pull
+```
+
+- Edit `README.md` and add a line, e.g. "Contributors: Alice, Bob"
+- Commit and push:
+
+```bash
+git add README.md
+git commit -m "Add contributor Bob"
+git push
+```
+
+**Step 3 — Person A**
+
+- Pull to get B’s commit:
+
+```bash
+git pull
+```
+
+No conflict if you edited different lines. If both edited the same line, Git will ask you to resolve a conflict (see below).
+
+**Optional — Trigger a conflict on purpose**
+
+- A and B both add a line at the **same place** in `README.md`, then A pushes, B pulls, B adds their line, commits, and pushes. When A runs `git pull`, Git may report a conflict.
+- Open the file: you’ll see conflict markers `<<<<<<<`, `=======`, `>>>>>>>`. Edit the file to keep what you want, remove the markers, then:
+
+```bash
+git add README.md
+git commit -m "Resolve conflict in README"
+git push
+```
+
+::: {.callout-important}
+Always **pull before you start** and **push when you finish** a small chunk. That keeps conflicts smaller and easier to fix.
+:::
+
+# Done
+
+You’ve done: setup, first commit, remote + push, branches + merge, and (optionally) pull and conflict resolution.
+
+**Next:** Use Git for one real project (code or paper). Try opening a Pull Request on GitHub or Merge Request on GitLab for a change on a branch.

@@ -1,0 +1,344 @@
+---
+title: "Git for Research"
+subtitle: "Version control for your lab"
+author: "Roi"
+date: today
+format:
+  revealjs:
+    theme: sky
+    transition: slide
+    slide-number: true
+    chalkboard: true
+    controls: true
+    progress: true
+    width: 1600
+    height: 900
+    highlight-style: github
+    background-transition: fade
+---
+
+## Welcome
+
+Git workshop for labmates — PhD students from various fields.
+
+**Today:**
+
+- Why version control? (And why not just Drive or the cluster?)
+- Git basics: the daily workflow and key commands
+- Hands-on: we do it together on your machine
+
+::: {.notes}
+Introduce yourself. Ask who has used Git before and who has not. No judgment — we start from basics.
+:::
+
+## Why version control?
+
+::: {.incremental}
+
+- **Lost track of changes** — Which script was the one that worked? Which draft had that result?
+- **Naming chaos** — `thesis_final_v2_FINAL.docx`, `analysis_old_backup.R`
+- **Can’t reproduce** — What exactly changed between last week and today?
+- **Goal:** One place. Full history. Every change with a **reason** (commit message).
+
+:::
+
+::: {.notes}
+Emphasize: this is for you first — code, scripts, papers, any text-based work. Collaboration comes later.
+:::
+
+## Why not Drive / shared folder / cluster only?
+
+| Tool | Limitation |
+|------|------------|
+| **Drive / Dropbox** | No real history — only “versions” and sync. Conflicts when two copies change. No “why” for each change. |
+| **Cluster / shared disk** | Same: no per-file history, no clear snapshots. You still end up with `run_v1.sh`, `run_v2.sh`. |
+| **Git** | **History + messages** for every snapshot. Works offline on your laptop, then sync to cluster or server. One workflow everywhere. |
+
+::: {.notes}
+Drive is great for sharing files; it’s not built for “what changed and why.” Git is.
+:::
+
+## Why Git specifically?
+
+::: {.incremental}
+
+- **Free**, works on your laptop, cluster, and server
+- **Standard** in research and software — papers, code, data pipelines
+- **Offline-first** — Commit locally, push to GitHub/GitLab later for backup or sharing
+- Today we focus on **you, one machine**; remote/backup is optional at the end
+
+:::
+
+## What is Git?
+
+**Git** = tool that keeps a **history of changes** in a folder (a *repository*).
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+- **Repository (repo)** — The folder Git tracks
+- **Commit** — A saved snapshot + a message (who, when, why)
+- **History** — Chain of commits; you can compare or restore any point
+
+:::
+
+::: {.column width="50%"}
+
+- **Branch** — A parallel line of work (try ideas without touching main)
+- **Remote** — Optional copy on a server (backup or sharing)
+
+:::
+
+:::
+
+::: {.notes}
+Keep it conceptual. We'll see the commands next.
+:::
+
+## Concepts in one picture
+
+```
+  commit A    commit B    commit C
+     ● --------- ● --------- ●    ← main branch
+                      \
+                       ● --- ●   ← feature branch
+                         D    E
+```
+
+Each ● is a snapshot. Branches let you try things without breaking the main line.
+
+::: {.notes}
+You can draw this on a board or use the chalkboard. Don't spend too long — we'll see it in practice.
+:::
+
+## Setup (1/2) — Install Git
+
+Check if Git is installed:
+
+```bash
+git --version
+```
+
+If not: [git-scm.com](https://git-scm.com/) — use default options.
+
+::: {.callout-tip}
+## Windows
+Use "Git Bash" for the terminal in this workshop (same commands as Mac/Linux).
+:::
+
+## Setup (2/2) — Tell Git who you are
+
+One-time per machine:
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+```
+
+Use the **same email** as on GitHub/GitLab if you use them.
+
+::: {.notes}
+Explain: every commit is signed with this name and email. No account needed for local-only Git.
+:::
+
+## Basic workflow — The loop
+
+Every time you finish a small, logical change:
+
+1. **Stage** — Choose what goes in the next snapshot: `git add`
+2. **Commit** — Save that snapshot with a message: `git commit -m "message"`
+3. Repeat.
+
+::: {.callout-important}
+## Golden rule
+You never commit without staging first. **Stage** (add) → **Commit**. Every time.
+:::
+
+::: {.notes}
+Sync (push/pull) is optional — for backup or sharing. We do it later.
+:::
+
+## Basic workflow — Status and history
+
+| What you want | Command |
+|---------------|---------|
+| What changed? (files) | `git status` |
+| Short status | `git status -s` |
+| List of commits | `git log` |
+| One line per commit | `git log --oneline` |
+
+Run `git status` often. It tells you what’s modified, staged, or untracked.
+
+## Basic workflow — Stage and commit
+
+| What you do | Command |
+|-------------|---------|
+| Stage one file | `git add <filename>` |
+| Stage all changes | `git add .` |
+| Commit with message | `git commit -m "Add results for experiment 1"` |
+
+Good messages: short, present tense, **why** (“Fix threshold in step 2” not “changes”).
+
+::: {.notes}
+`add` = “put this in the next snapshot.” We’ll practice in the workshop.
+:::
+
+## Basic workflow — Inspect and undo
+
+| What you want | Command |
+|---------------|---------|
+| See changes not yet staged | `git diff` |
+| See changes already staged | `git diff --staged` |
+| Discard changes in a file (careful!) | `git restore <file>` |
+| Unstage a file (keep changes) | `git restore --staged <file>` |
+
+`git diff` = working copy vs last commit (or vs staged). Very useful before committing.
+
+## Basic workflow — Picture
+
+```
+  Working directory     Staging area        Repository (history)
+  (your files)    →     (git add)     →     (git commit)
+       edited                staged              snapshot
+```
+
+You edit → you **add** (stage) → you **commit**. History is only what you committed.
+
+## IDE integration — Why use it?
+
+Same Git workflow — **status**, **stage**, **commit** — from your editor instead of the terminal.
+
+::: {.incremental}
+
+- See changed files and diffs at a glance
+- Stage, commit, and write messages in one place
+- Switch branches and push/pull from the UI
+- Fewer context switches when coding or writing
+
+:::
+
+Today we practice in the terminal so you understand what the IDE is doing; then you can use either.
+
+## IDE integration — RStudio
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+**Git pane** (top-right when in a Git repo):
+
+- **Status** — Modified, staged, untracked files
+- **Diff** — Click a file to see changes
+- **Stage** — Checkbox or "Stage" button
+- **Commit** — Message box + "Commit" button
+- **Branches** — Dropdown to switch, create, merge
+- **Push / Pull** — Blue/green arrows (after remote)
+
+:::
+
+::: {.column width="50%"}
+
+::: {.callout-tip}
+## First time in RStudio
+**Tools → Global Options → Git**: ensure "Git executable" points to your Git (e.g. `/usr/bin/git`). RStudio will use the same `user.name` / `user.email` as the terminal.
+:::
+
+**New project from Git:** File → New Project → Version Control → Git; paste repo URL to clone.
+
+:::
+
+:::
+
+::: {.notes}
+RStudio has excellent Git integration; many R users never need the terminal for daily Git.
+:::
+
+## IDE integration — VS Code
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+**Source Control view** (sidebar icon or `Ctrl/Cmd+Shift+G`):
+
+- **Changes** — List of modified/untracked files; click for **diff**
+- **Stage** — "+" next to file or "Stage All Changes"
+- **Message** — Box at top; **Commit** button (checkmark)
+- **Branches** — Bottom-left status bar: current branch; click to switch/create
+- **Sync** — Push/pull via status bar or "..." menu in Source Control
+
+:::
+
+::: {.column width="50%"}
+
+::: {.callout-tip}
+## First time in VS Code
+Install the built-in **Git** support (usually already active). For GitHub: "GitHub Pull Requests and Issues" extension. Git uses your system Git and config (`user.name` / `user.email`).
+:::
+
+**Clone repo:** `Ctrl/Cmd+Shift+P` → "Git: Clone" → paste URL → choose folder.
+
+:::
+
+:::
+
+::: {.notes}
+VS Code works the same on Mac, Windows, Linux. Many researchers use it for Python, R (with R extension), or general scripting.
+:::
+
+## Branches (short)
+
+- **Create and switch:** `git switch -c my-feature`
+- **Switch back:** `git switch main`
+- **Merge into current:** `git merge my-feature`
+
+Branches let you try ideas without touching the main line. We'll try this in the workshop.
+
+::: {.notes}
+"checkout" is the old name; "switch" is clearer.
+:::
+
+## Remote & backup (optional)
+
+When you want a copy on a server (GitHub/GitLab) — for **backup** or later sharing:
+
+- **Add remote:** `git remote add origin <url>`
+- **Push your branch:** `git push -u origin main`
+- **Pull** (if you use the same repo from another machine): `git pull`
+
+Today we focus on local workflow; remote is one short exercise at the end if time.
+
+## Hands-on: switch to the workshop
+
+Open **workshop/exercises.html** (or the `workshop/exercises.qmd` source).
+
+We'll do in order:
+
+1. Setup check
+2. First repo + first commit
+3. Basic workflow again (status, diff, add, commit)
+4. Branches
+5. Remote + push (optional, for backup)
+
+::: {.notes}
+Give everyone a minute to open the file. Then start with "Setup" and do each block together.
+:::
+
+## Wrap-up
+
+::: {.incremental}
+
+- **Git** = version history for a folder; **commit** = snapshot with a message; **workflow:** `status` → `add` → `commit`.
+- **Key commands:** `git status`, `git add`, `git commit -m "..."`, `git log` / `git diff`; branches and remote when you need them.
+- **Next steps:** Use Git for one real project (code or paper); add a remote later for backup or sharing.
+
+:::
+
+**Resources:** [git-scm.com/book](https://git-scm.com/book), [GitHub Docs](https://docs.github.com), [GitLab Docs](https://docs.gitlab.com)
+
+## Thank you — Questions?
+
+::: {.center}
+Any questions? We can redo any exercise or go deeper on workflow or branches.
+:::
