@@ -300,16 +300,39 @@ Today we practice in the terminal so you understand what the IDE is doing; then 
 - **Branches** — Dropdown to switch, create, merge
 - **Push / Pull** — Blue/green arrows (after remote)
 
-:::
-
-::: {.column width="50%"}
-
 ::: {.callout-tip}
 ## First time in RStudio
 **Tools → Global Options → Git**: ensure "Git executable" points to your Git (e.g. `/usr/bin/git`). RStudio will use the same `user.name` / `user.email` as the terminal.
 :::
 
+:::
+
+::: {.column width="50%"}
+
+![Tools → Global Options → Git](imgs/rstudio/version-control-options.png){width=100%}
+
+
+
 **New project from Git:** File → New Project → Version Control → Git; paste repo URL to clone.
+
+:::
+
+:::
+
+## RStudio — Commit and Git options
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+![RStudio Git pane](imgs/rstudio/rstudio-vcs-pane-labeled.png){width=100%}
+
+
+:::
+
+::: {.column width="50%"}
+
+![Commit pane — message and Commit button](imgs/rstudio/git-commit-pane.png){width=100%}
 
 :::
 
