@@ -264,13 +264,12 @@ Roi
 <h2>Experiment with code — see the difference</h2>
 <p>When you <strong>try things</strong> (new parameters, a different method, a refactor):</p>
 <ul>
-<li>Git keeps a clear <strong>before</strong> (your last commit).</li>
-<li>You can always see <strong>exactly what changed</strong> — <code>git diff</code> shows every line added or removed.</li>
-<li>If the experiment goes wrong, you know precisely what to undo or revert to.</li>
+<li class="fragment">Git keeps a clear <strong>before</strong> (your last commit).</li>
+<li class="fragment">You can always see <strong>exactly what changed</strong> — <code>git diff</code> shows every line added or removed.</li>
+<li class="fragment">If the experiment goes wrong, you know precisely what to undo or revert to.</li>
+<li class="fragment">No more “what did I change?” — the diff is the answer. <img data-src="imgs/diff-example.png" style="width:55.0%" alt="Small but important diff — e.g.&nbsp;a one-line fix or parameter change"></li>
 </ul>
-<p>No more “what did I change?” — the diff is the answer.</p>
-
-<img data-src="imgs/diff-example.png" style="width:75.0%" class="r-stretch quarto-figure-center"><p class="caption">Small but important diff — e.g.&nbsp;a one-line fix or parameter change</p><aside class="notes">
+<aside class="notes">
 <p>This is a big win for iterative work: try, compare, keep or discard.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -515,6 +514,34 @@ Roi
 </tbody>
 </table>
 <p>Run <code>git status</code> often. It tells you what’s modified, staged, or untracked.</p>
+</section>
+<section id="tracked-vs-untracked-reading-git-status" class="slide level2">
+<h2>Tracked vs untracked — Reading <code>git status</code></h2>
+<p><strong>Tracked</strong> — Git already knows the file (it was in the last commit or you ran <code>git add</code>). Git shows changes: modified, staged, or clean.</p>
+<p><strong>Untracked</strong> — The file is in the folder but Git is not tracking it yet. It won’t be in the next commit until you <code>git add</code> it.</p>
+<p><code>git status</code> groups files into:</p>
+<ul>
+<li><strong>Changes to be committed</strong> (staged) — will be in the next commit</li>
+<li><strong>Changes not staged for commit</strong> — modified but not staged</li>
+<li><strong>Untracked files</strong> — not in the repo yet</li>
+</ul>
+</section>
+<section id="reading-git-status-example" class="slide level2">
+<h2>Reading <code>git status</code> — Example</h2>
+
+<img data-src="imgs/git_status_output2.png" style="width:65.0%" class="r-stretch quarto-figure-center"><p class="caption">Example of git status output</p><aside class="notes">
+<p>Walk through a real git status output so people see the sections and wording.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="basic-workflow-stage-and-commit" class="slide level2">
 <h2>Basic workflow — Stage and commit</h2>
@@ -984,9 +1011,9 @@ Roi
         // The "normal" size of the presentation, aspect ratio will be preserved
         // when the presentation is scaled to fit different resolutions. Can be
         // specified using percentage units.
-        width: 1600,
+        width: 1920,
 
-        height: 900,
+        height: 1080,
 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,

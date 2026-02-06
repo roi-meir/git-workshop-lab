@@ -12,8 +12,8 @@ format:
     chalkboard: true
     controls: true
     progress: true
-    width: 1600
-    height: 900
+    width: 1920
+    height: 1080
     highlight-style: github
     background-transition: fade
 ---
@@ -57,13 +57,13 @@ Emphasize: this is for you first — code, scripts, papers, any text-based work.
 
 When you **try things** (new parameters, a different method, a refactor):
 
+::: {.incremental}
 - Git keeps a clear **before** (your last commit).
 - You can always see **exactly what changed** — `git diff` shows every line added or removed.
 - If the experiment goes wrong, you know precisely what to undo or revert to.
-
-No more "what did I change?" — the diff is the answer.
-
-![Small but important diff — e.g. a one-line fix or parameter change](imgs/diff-example.png){width=75%}
+- No more "what did I change?" — the diff is the answer.
+![Small but important diff — e.g. a one-line fix or parameter change](imgs/diff-example.png){width=55%}
+:::
 
 ::: {.notes}
 This is a big win for iterative work: try, compare, keep or discard.
@@ -214,6 +214,26 @@ Sync (push/pull) is optional — for backup or sharing. We do it later.
 | One line per commit | `git log --oneline` |
 
 Run `git status` often. It tells you what’s modified, staged, or untracked.
+
+## Tracked vs untracked — Reading `git status`
+
+**Tracked** — Git already knows the file (it was in the last commit or you ran `git add`). Git shows changes: modified, staged, or clean.
+
+**Untracked** — The file is in the folder but Git is not tracking it yet. It won't be in the next commit until you `git add` it.
+
+`git status` groups files into:
+
+- **Changes to be committed** (staged) — will be in the next commit
+- **Changes not staged for commit** — modified but not staged
+- **Untracked files** — not in the repo yet
+
+## Reading `git status` — Example
+
+![Example of git status output](imgs/git_status_output.png){width=65%}
+
+::: {.notes}
+Walk through a real git status output so people see the sections and wording.
+:::
 
 ## Basic workflow — Stage and commit
 
