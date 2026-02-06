@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 
-/* All slide titles: Lato font, no uppercase */
+/* All slide titles: Lato font, no uppercase, more space below */
 .reveal h1,
 .reveal h2,
 .reveal h3,
@@ -11,6 +11,7 @@
   font-weight: 700;
   letter-spacing: -0.02em;
   text-transform: none;
+  margin-bottom: 0.55em;
 }
 
 /* Title slide (main title) */

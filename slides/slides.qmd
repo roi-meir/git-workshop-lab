@@ -18,9 +18,10 @@ format:
     background-transition: fade
 ---
 
-## Welcome
+## Welcome - Git workshop for labmates 
 
-Git workshop for labmates — we'll focus on a **single code writer** (the usual use case in our research).
+we'll focus on a **single** code writer.
+
 
 **Today:**
 
