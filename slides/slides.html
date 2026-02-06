@@ -9,7 +9,7 @@
 <link href="slides_files/libs/quarto-html/quarto-syntax-highlighting-8b4baf804e461d9b72633f0de59a0cac.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.27">
 
-  <meta name="author" content="Roi">
+  <meta name="author" content="Roi Meir">
   <meta name="dcterms.date" content="2026-02-06">
   <title>Git for Research</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -198,12 +198,12 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Git for Research</h1>
-  <p class="subtitle">Version control for your lab</p>
+  <p class="subtitle">Version control for your research</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Roi 
+Roi Meir 
 </div>
 </div>
 </div>
@@ -212,7 +212,7 @@ Roi
 </section>
 <section id="welcome" class="slide level2">
 <h2>Welcome</h2>
-<p>Git workshop for labmates — PhD students from various fields.</p>
+<p>Git workshop for labmates</p>
 <p><strong>Today:</strong></p>
 <ul>
 <li>Why version control? (And why not just Drive or the cluster?)</li>
@@ -233,11 +233,28 @@ Roi
           display:block!important;
       }</style></aside>
 </section>
+<section id="why-backup" class="slide level2">
+<h2>Why backup?</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><strong>Why backup matters:</strong> Your <strong>code is a research output</strong></p>
+<ul>
+<li>Like your data, it can’t be easily restored if you lose it (laptop failure, theft, accidental overwrite).</li>
+<li>Scripts, pipelines, and analysis code are irreplaceable.</li>
+<li>Backing them up (e.g.&nbsp;push to GitHub/GitLab) gives you a safe copy and peace of mind.</li>
+</ul>
+</div><div class="column" style="width:45%;">
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="imgs/brain_explode_git.png" style="width:100.0%"></p>
+<figcaption>Why backup matters</figcaption>
+</figure>
+</div>
+</div>
+</div></div>
+</section>
 <section id="why-version-control" class="slide level2">
-<h2>Why version control?</h2>
-
-<img data-src="imgs/brain_explode_git.png" style="width:60.0%" class="r-stretch"></section>
-<section id="why-version-control-1" class="slide level2">
 <h2>Why version control?</h2>
 <p>Importance of version control</p>
 <ul>
@@ -337,19 +354,13 @@ Roi
 <section id="what-is-git" class="slide level2">
 <h2>What is Git?</h2>
 <p><strong>Git</strong> = tool that keeps a <strong>history of changes</strong> in a folder (a <em>repository</em>).</p>
-<div class="columns">
-<div class="column" style="width:50%;">
 <ul>
 <li><strong>Repository (repo)</strong> — The folder Git tracks</li>
 <li><strong>Commit</strong> — A saved snapshot + a message (who, when, why)</li>
 <li><strong>History</strong> — Chain of commits; you can compare or restore any point</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<ul>
 <li><strong>Branch</strong> — A parallel line of work (try ideas without touching main)</li>
 <li><strong>Remote</strong> — copy on a server (backup or sharing)</li>
 </ul>
-</div></div>
 <aside class="notes">
 <p>Keep it conceptual. We’ll see the commands next.</p>
 <style type="text/css">

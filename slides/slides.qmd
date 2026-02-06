@@ -1,7 +1,7 @@
 ---
 title: "Git for Research"
-subtitle: "Version control for your lab"
-author: "Roi"
+subtitle: "Version control for your research"
+author: "Roi Meir"
 date: today
 format:
   revealjs:
@@ -20,7 +20,7 @@ format:
 
 ## Welcome
 
-Git workshop for labmates — PhD students from various fields.
+Git workshop for labmates
 
 **Today:**
 
@@ -32,9 +32,31 @@ Git workshop for labmates — PhD students from various fields.
 Introduce yourself. Ask who has used Git before and who has not. No judgment — we start from basics.
 :::
 
-## Why version control?
+## Why backup?
 
-![](imgs/brain_explode_git.png){width=60%}
+::: {.columns}
+
+::: {.column width="55%"}
+
+**Why backup matters:** Your **code is a research output**
+
+- Like your data, it can't be easily restored if you lose it (laptop failure, theft, accidental overwrite).
+- Scripts, pipelines, and analysis code are irreplaceable.
+- Backing them up (e.g. push to GitHub/GitLab) gives you a safe copy and peace of mind.
+
+:::
+
+::: {.column width="45%"}
+
+::: {.fragment}
+
+![Why backup matters](imgs/brain_explode_git.png){width=100%}
+
+:::
+
+:::
+
+:::
 
 ## Why version control?
 
@@ -96,24 +118,12 @@ Drive is great for sharing files; it’s not built for “what changed and why.�
 
 **Git** = tool that keeps a **history of changes** in a folder (a *repository*).
 
-::: {.columns}
-
-::: {.column width="50%"}
-
 - **Repository (repo)** — The folder Git tracks
 - **Commit** — A saved snapshot + a message (who, when, why)
 - **History** — Chain of commits; you can compare or restore any point
-
-:::
-
-::: {.column width="50%"}
-
 - **Branch** — A parallel line of work (try ideas without touching main)
 - **Remote** — copy on a server (backup or sharing)
 
-:::
-
-:::
 
 ::: {.notes}
 Keep it conceptual. We'll see the commands next.
