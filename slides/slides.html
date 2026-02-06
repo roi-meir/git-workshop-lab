@@ -331,7 +331,7 @@ Roi
 <li class="fragment"><strong>Free</strong>, works on your laptop, cluster, and server</li>
 <li class="fragment"><strong>Standard</strong> in research and software — papers, code, data pipelines</li>
 <li class="fragment"><strong>Offline-first</strong> — Commit locally, push to GitHub/GitLab later for backup or sharing</li>
-<li class="fragment">Today we focus on <strong>you, one machine</strong>; remote/backup is optional at the end</li>
+<li class="fragment">Today we focus on <strong>you, one machine</strong>; remote/backup is at the end</li>
 </ul>
 </section>
 <section id="what-is-git" class="slide level2">
@@ -347,7 +347,7 @@ Roi
 </div><div class="column" style="width:50%;">
 <ul>
 <li><strong>Branch</strong> — A parallel line of work (try ideas without touching main)</li>
-<li><strong>Remote</strong> — Optional copy on a server (backup or sharing)</li>
+<li><strong>Remote</strong> — copy on a server (backup or sharing)</li>
 </ul>
 </div></div>
 <aside class="notes">
@@ -582,6 +582,29 @@ Roi
           display:block!important;
       }</style></aside>
 </section>
+<section id="good-commit-messages-structure-and-why-it-matters" class="slide level2">
+<h2>Good commit messages — structure and why it matters</h2>
+<p><strong>Structure:</strong></p>
+<ul>
+<li><strong>Subject line</strong> — One short line (≈50 chars), imperative mood: “Add …”, “Fix …”, “Update …”.</li>
+<li><strong>Optional body</strong> — What changed and <strong>why</strong>; blank line after the subject. Use when the change needs context.</li>
+</ul>
+<p><strong>Why it matters:</strong> Good messages make <code>git log</code> readable. Future you (and collaborators) can understand and find changes without opening every commit. Bad messages (“fix”, “update”, “changes”) make history useless.</p>
+<p><strong>Tip:</strong> AI can help — paste your <code>git diff</code> and ask for a commit message, or use your editor’s AI to suggest one from the staged changes.</p>
+<aside class="notes">
+<p>Emphasize: the message is for humans reading history. AI is a practical helper, not a replacement for thinking about what you did.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="basic-workflow-inspect-and-undo" class="slide level2">
 <h2>Basic workflow — Inspect and undo</h2>
 <table class="caption-top">
@@ -740,6 +763,23 @@ Roi
           display:block!important;
       }</style></aside>
 </section>
+<section id="ide-integration-vs-code-screenshot" class="slide level2">
+<h2>IDE integration — VS Code (screenshot)</h2>
+
+<img data-src="imgs/vscode/vscode_git_pane.PNG" style="width:90.0%" class="r-stretch quarto-figure-center"><p class="caption">VS Code Source Control / Git pane</p><aside class="notes">
+<p>Walk through the pane: changes list, stage, message box, commit button.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="branches-short" class="slide level2">
 <h2>Branches (short)</h2>
 <ul>
@@ -762,8 +802,8 @@ Roi
           display:block!important;
       }</style></aside>
 </section>
-<section id="remote-backup-optional" class="slide level2">
-<h2>Remote &amp; backup (optional)</h2>
+<section id="remote-backup" class="slide level2">
+<h2>Remote &amp; backup</h2>
 <p>When you want a copy on a server (GitHub/GitLab) — for <strong>backup</strong> or later sharing:</p>
 <ul>
 <li><strong>Add remote:</strong> <code>git remote add origin &lt;url&gt;</code></li>
@@ -799,7 +839,7 @@ Roi
 <li><strong>Generate templates:</strong> <a href="https://www.toptal.com/developers/gitignore">gitignore.io</a> — create useful .gitignore files for your project (OS, IDEs, languages).</li>
 </ul>
 <aside class="notes">
-<p>One line per pattern; use <code>*</code> for wildcards. No need to ignore files already tracked — remove from index first if you add them to .gitignore later.</p>
+<p>One line per pattern; use <code>*</code> for wildcards. No need to ignore files already tracked — remove from index first if you add them to .gitignore later. Mention large/binary files: Git stores full copies of every version, so big data, images, or models bloat the repo; add them to .gitignore or use Git LFS for large files you must track.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -821,7 +861,7 @@ Roi
 <li>First repo + first commit</li>
 <li>Basic workflow again (status, diff, add, commit)</li>
 <li>Branches</li>
-<li>Remote + push (optional, for backup)</li>
+<li>Remote + push (for backup and sharing)</li>
 </ol>
 <aside class="notes">
 <p>Give everyone a minute to open the file. Then start with “Setup” and do each block together.</p>
@@ -846,10 +886,36 @@ Roi
 </ul>
 <p><strong>Resources:</strong> <a href="https://git-scm.com/book">git-scm.com/book</a>, <a href="https://docs.github.com">GitHub Docs</a>, <a href="https://docs.gitlab.com">GitLab Docs</a></p>
 </section>
+<section id="advanced-topics-next-steps" class="slide level2">
+<h2>Advanced topics (next steps)</h2>
+<p>Things to learn when you’re ready:</p>
+<ul>
+<li><strong>Merge</strong> — Bring a branch into another (<code>git merge</code>); fast-forward vs merge commit.</li>
+<li><strong>Pull request (PR)</strong> — Propose changes on GitHub/GitLab; review, discuss, then merge.</li>
+<li><strong>Stash</strong> — Save uncommitted work temporarily (<code>git stash</code> / <code>git stash pop</code>); switch context without committing.</li>
+<li><strong>Conflicts</strong> — When two branches change the same lines; resolve in the editor, then <code>git add</code> and finish merge/rebase.</li>
+<li><strong>Tags</strong> — Mark a point in history (e.g.&nbsp;a release): <code>git tag paper-initial-submission</code>.</li>
+<li><strong>Bisect</strong> — Find the commit that introduced a bug: <code>git bisect start</code> / <code>good</code> / <code>bad</code>; Git binary-searches history.</li>
+</ul>
+<aside class="notes">
+<p>Point people to the book and docs; suggest tackling one topic at a time when they hit a real need.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="thank-you-questions" class="slide level2">
 <h2>Thank you — Questions?</h2>
 <div class="center">
 <p>Any questions? We can redo any exercise or go deeper on workflow or branches.</p>
+<p><strong>You’re always welcome to ask me anything in the future.</strong></p>
 </div>
 
 </section>

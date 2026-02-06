@@ -1,0 +1,18 @@
+---
+description: After editing any .qmd file in this project, re-render the affected document(s).
+globs: ["**/*.qmd"]
+---
+
+# Quarto: re-render after .qmd changes
+
+When you create or edit any `.qmd` file in this repo, run the appropriate render **after** saving:
+
+- **`slides/slides.qmd`** → `quarto render slides/slides.qmd`
+- **`workshop/exercises.qmd`** → `quarto render workshop/exercises.qmd`
+
+To re-render both in one go from the project root:
+```bash
+quarto render slides/slides.qmd && quarto render workshop/exercises.qmd
+```
+
+Do this as part of the same response in which you changed the .qmd file, so the user sees updated HTML without a separate step.

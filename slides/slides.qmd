@@ -249,6 +249,21 @@ Good messages: short, present tense, **why** (“Fix threshold in step 2” not 
 `add` = “put this in the next snapshot.” We’ll practice in the workshop.
 :::
 
+## Good commit messages — structure and why it matters
+
+**Structure:**
+
+- **Subject line** — One short line (≈50 chars), imperative mood: "Add …", "Fix …", "Update …".
+- **Optional body** — What changed and **why**; blank line after the subject. Use when the change needs context.
+
+**Why it matters:** Good messages make `git log` readable. Future you (and collaborators) can understand and find changes without opening every commit. Bad messages ("fix", "update", "changes") make history useless.
+
+**Tip:** AI can help — paste your `git diff` and ask for a commit message, or use your editor's AI to suggest one from the staged changes.
+
+::: {.notes}
+Emphasize: the message is for humans reading history. AI is a practical helper, not a replacement for thinking about what you did.
+:::
+
 ## Basic workflow — Inspect and undo
 
 | What you want | Command |
@@ -375,6 +390,14 @@ Install the built-in **Git** support (usually already active). For GitHub: "GitH
 VS Code works the same on Mac, Windows, Linux. Many researchers use it for Python, R (with R extension), or general scripting.
 :::
 
+## IDE integration — VS Code (screenshot)
+
+![VS Code Source Control / Git pane](imgs/vscode/vscode_git_pane.PNG){width=90%}
+
+::: {.notes}
+Walk through the pane: changes list, stage, message box, commit button.
+:::
+
 ## Branches (short)
 
 - **Create and switch:** `git switch -c my-feature`
@@ -430,7 +453,7 @@ Git will ignore these even if they’re in the folder. Add `.gitignore` early an
 - **Generate templates:** [gitignore.io](https://www.toptal.com/developers/gitignore) — create useful .gitignore files for your project (OS, IDEs, languages).
 
 ::: {.notes}
-One line per pattern; use `*` for wildcards. No need to ignore files already tracked — remove from index first if you add them to .gitignore later.
+One line per pattern; use `*` for wildcards. No need to ignore files already tracked — remove from index first if you add them to .gitignore later. Mention large/binary files: Git stores full copies of every version, so big data, images, or models bloat the repo; add them to .gitignore or use Git LFS for large files you must track.
 :::
 
 ## Hands-on: switch to the workshop
@@ -469,12 +492,8 @@ Things to learn when you're ready:
 - **Pull request (PR)** — Propose changes on GitHub/GitLab; review, discuss, then merge.
 - **Stash** — Save uncommitted work temporarily (`git stash` / `git stash pop`); switch context without committing.
 - **Conflicts** — When two branches change the same lines; resolve in the editor, then `git add` and finish merge/rebase.
-- **Rebase** — Replay your commits on top of another branch (`git rebase`); cleaner history, use with care on shared branches.
-- **Tags** — Mark a point in history (e.g. a release): `git tag v1.0`.
-- **Cherry-pick** — Apply one specific commit from another branch: `git cherry-pick <commit>`.
-- **Amend** — Fix the last commit: `git commit --amend` (message or add forgotten files).
-- **Reflog** — See where branches and HEAD have been: `git reflog`; helps recover “lost” commits.
-- **Blame** — See who changed each line in a file: `git blame <file>`.
+- **Tags** — Mark a point in history (e.g. a release): `git tag paper-initial-submission`.
+- **Bisect** — Find the commit that introduced a bug: `git bisect start` / `good` / `bad`; Git binary-searches history.
 
 ::: {.notes}
 Point people to the book and docs; suggest tackling one topic at a time when they hit a real need.
@@ -484,4 +503,6 @@ Point people to the book and docs; suggest tackling one topic at a time when the
 
 ::: {.center}
 Any questions? We can redo any exercise or go deeper on workflow or branches.
+
+**You're always welcome to ask me anything in the future.**
 :::
