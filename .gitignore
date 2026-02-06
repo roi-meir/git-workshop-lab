@@ -27,3 +27,6 @@ Thumbs.db
 # slides/slides_files/
 # workshop/exercises.html
 # workshop/exercises_files/
+
+/.quarto/
+**/*.quarto_ipynb

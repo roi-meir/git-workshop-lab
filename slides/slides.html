@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.8.27">
 
   <meta name="author" content="Roi">
-  <meta name="dcterms.date" content="2026-02-05">
+  <meta name="dcterms.date" content="2026-02-06">
   <title>Git for Research</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -97,6 +97,7 @@
     code span.wa { color: #ff5555; } /* Warning */
   </style>
   <link rel="stylesheet" href="slides_files/libs/revealjs/dist/theme/quarto-7aaf31681eed659f0200bcc8fe9a56fc.css">
+  <link rel="stylesheet" href="style.css">
   <link href="slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="slides_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -207,7 +208,7 @@ Roi
 </div>
 </div>
 
-  <p class="date">2026-02-05</p>
+  <p class="date">2026-02-06</p>
 </section>
 <section id="welcome" class="slide level2">
 <h2>Welcome</h2>
@@ -234,6 +235,11 @@ Roi
 </section>
 <section id="why-version-control" class="slide level2">
 <h2>Why version control?</h2>
+
+<img data-src="imgs/brain_explode_git.png" style="width:60.0%" class="r-stretch"></section>
+<section id="why-version-control-1" class="slide level2">
+<h2>Why version control?</h2>
+<p>Importance of version control</p>
 <ul>
 <li class="fragment"><strong>Lost track of changes</strong> — Which script was the one that worked? Which draft had that result?</li>
 <li class="fragment"><strong>Naming chaos</strong> — <code>thesis_final_v2_FINAL.docx</code>, <code>analysis_old_backup.R</code></li>
@@ -242,6 +248,30 @@ Roi
 </ul>
 <aside class="notes">
 <p>Emphasize: this is for you first — code, scripts, papers, any text-based work. Collaboration comes later.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="experiment-with-code-see-the-difference" class="slide level2">
+<h2>Experiment with code — see the difference</h2>
+<p>When you <strong>try things</strong> (new parameters, a different method, a refactor):</p>
+<ul>
+<li>Git keeps a clear <strong>before</strong> (your last commit).</li>
+<li>You can always see <strong>exactly what changed</strong> — <code>git diff</code> shows every line added or removed.</li>
+<li>If the experiment goes wrong, you know precisely what to undo or revert to.</li>
+</ul>
+<p>No more “what did I change?” — the diff is the answer.</p>
+
+<img data-src="imgs/diff-example.png" style="width:75.0%" class="r-stretch quarto-figure-center"><p class="caption">Small but important diff — e.g.&nbsp;a one-line fix or parameter change</p><aside class="notes">
+<p>This is a big win for iterative work: try, compare, keep or discard.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -396,6 +426,31 @@ Roi
           display:block!important;
       }</style></aside>
 </section>
+<section id="new-project-init-or-clone" class="slide level2">
+<h2>New project: init or clone</h2>
+<p><strong>Start from scratch</strong> (new folder, new repo):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href=""></a><span class="bu">cd</span> my-project</span>
+<span id="cb4-2"><a href=""></a><span class="fu">git</span> init</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Start from an existing repo</strong> (e.g.&nbsp;GitHub, GitLab, a colleague’s copy):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href=""></a><span class="fu">git</span> clone <span class="op">&lt;</span>url<span class="op">&gt;</span>   <span class="co"># e.g. https://github.com/user/repo.git</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li><code>git init</code> — Git starts tracking the current folder; you make the first commit.</li>
+<li><code>git clone</code> — You get a full copy (history included); you’re ready to work and push back if there’s a remote.</li>
+</ul>
+<aside class="notes">
+<p>Most workshops: start with init. In the lab you’ll often clone first (existing project), then branch and commit.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="basic-workflow-the-loop" class="slide level2">
 <h2>Basic workflow — The loop</h2>
 <p>Every time you finish a small, logical change:</p>
@@ -537,6 +592,102 @@ Roi
        edited                staged              snapshot</code></pre>
 <p>You edit → you <strong>add</strong> (stage) → you <strong>commit</strong>. History is only what you committed.</p>
 </section>
+<section id="ide-integration-why-use-it" class="slide level2">
+<h2>IDE integration — Why use it?</h2>
+<p>Same Git workflow — <strong>status</strong>, <strong>stage</strong>, <strong>commit</strong> — from your editor instead of the terminal.</p>
+<ul>
+<li class="fragment">See changed files and diffs at a glance</li>
+<li class="fragment">Stage, commit, and write messages in one place</li>
+<li class="fragment">Switch branches and push/pull from the UI</li>
+<li class="fragment">Fewer context switches when coding or writing</li>
+</ul>
+<p>Today we practice in the terminal so you understand what the IDE is doing; then you can use either.</p>
+</section>
+<section id="ide-integration-rstudio" class="slide level2">
+<h2>IDE integration — RStudio</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Git pane</strong> (top-right when in a Git repo):</p>
+<ul>
+<li><strong>Status</strong> — Modified, staged, untracked files</li>
+<li><strong>Diff</strong> — Click a file to see changes</li>
+<li><strong>Stage</strong> — Checkbox or “Stage” button</li>
+<li><strong>Commit</strong> — Message box + “Commit” button</li>
+<li><strong>Branches</strong> — Dropdown to switch, create, merge</li>
+<li><strong>Push / Pull</strong> — Blue/green arrows (after remote)</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>First time in RStudio</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Tools → Global Options → Git</strong>: ensure “Git executable” points to your Git (e.g.&nbsp;<code>/usr/bin/git</code>). RStudio will use the same <code>user.name</code> / <code>user.email</code> as the terminal.</p>
+</div>
+</div>
+</div>
+<p><strong>New project from Git:</strong> File → New Project → Version Control → Git; paste repo URL to clone.</p>
+</div></div>
+<aside class="notes">
+<p>RStudio has excellent Git integration; many R users never need the terminal for daily Git.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="ide-integration-vs-code" class="slide level2">
+<h2>IDE integration — VS Code</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Source Control view</strong> (sidebar icon or <code>Ctrl/Cmd+Shift+G</code>):</p>
+<ul>
+<li><strong>Changes</strong> — List of modified/untracked files; click for <strong>diff</strong></li>
+<li><strong>Stage</strong> — “+” next to file or “Stage All Changes”</li>
+<li><strong>Message</strong> — Box at top; <strong>Commit</strong> button (checkmark)</li>
+<li><strong>Branches</strong> — Bottom-left status bar: current branch; click to switch/create</li>
+<li><strong>Sync</strong> — Push/pull via status bar or “…” menu in Source Control</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>First time in VS Code</strong></p>
+</div>
+<div class="callout-content">
+<p>Install the built-in <strong>Git</strong> support (usually already active). For GitHub: “GitHub Pull Requests and Issues” extension. Git uses your system Git and config (<code>user.name</code> / <code>user.email</code>).</p>
+</div>
+</div>
+</div>
+<p><strong>Clone repo:</strong> <code>Ctrl/Cmd+Shift+P</code> → “Git: Clone” → paste URL → choose folder.</p>
+</div></div>
+<aside class="notes">
+<p>VS Code works the same on Mac, Windows, Linux. Many researchers use it for Python, R (with R extension), or general scripting.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="branches-short" class="slide level2">
 <h2>Branches (short)</h2>
 <ul>
@@ -568,6 +719,46 @@ Roi
 <li><strong>Pull</strong> (if you use the same repo from another machine): <code>git pull</code></li>
 </ul>
 <p>Today we focus on local workflow; remote is one short exercise at the end if time.</p>
+</section>
+<section id="gitignore-keep-noise-and-secrets-out" class="slide level2">
+<h2>.gitignore — Keep noise and secrets out</h2>
+<p>A <strong><code>.gitignore</code></strong> file in the repo root tells Git which files or folders <strong>not</strong> to track.</p>
+<p><strong>Why:</strong> Avoid committing build outputs, large data, secrets, IDE/OS junk — and keep <code>git status</code> clean.</p>
+<p><strong>Example</strong> (e.g.&nbsp;for R/Python + data):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource gitignore number-lines code-with-copy"><code class="sourceCode"><span id="cb7-1"><a href=""></a># Data and outputs (large or machine-specific)</span>
+<span id="cb7-2"><a href=""></a>data/</span>
+<span id="cb7-3"><a href=""></a>outputs/</span>
+<span id="cb7-4"><a href=""></a>*.csv</span>
+<span id="cb7-5"><a href=""></a></span>
+<span id="cb7-6"><a href=""></a># R</span>
+<span id="cb7-7"><a href=""></a>.Rproj.user</span>
+<span id="cb7-8"><a href=""></a>*.Rdata</span>
+<span id="cb7-9"><a href=""></a></span>
+<span id="cb7-10"><a href=""></a># Python</span>
+<span id="cb7-11"><a href=""></a>__pycache__/</span>
+<span id="cb7-12"><a href=""></a>*.pyc</span>
+<span id="cb7-13"><a href=""></a>.env</span>
+<span id="cb7-14"><a href=""></a></span>
+<span id="cb7-15"><a href=""></a># OS / editor</span>
+<span id="cb7-16"><a href=""></a>.DS_Store</span>
+<span id="cb7-17"><a href=""></a>*.swp</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Git will ignore these even if they’re in the folder. Add <code>.gitignore</code> early and commit it.</p>
+<ul>
+<li><strong>Generate templates:</strong> <a href="https://www.toptal.com/developers/gitignore">gitignore.io</a> — create useful .gitignore files for your project (OS, IDEs, languages).</li>
+</ul>
+<aside class="notes">
+<p>One line per pattern; use <code>*</code> for wildcards. No need to ignore files already tracked — remove from index first if you add them to .gitignore later.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="hands-on-switch-to-the-workshop" class="slide level2">
 <h2>Hands-on: switch to the workshop</h2>

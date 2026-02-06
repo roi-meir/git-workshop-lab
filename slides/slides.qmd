@@ -7,6 +7,7 @@ format:
   revealjs:
     theme: sky
     transition: slide
+    css: style.css
     slide-number: true
     chalkboard: true
     controls: true
@@ -33,7 +34,13 @@ Introduce yourself. Ask who has used Git before and who has not. No judgment —
 
 ## Why version control?
 
+![](imgs/brain_explode_git.png){width=60%}
+
+## Why version control?
+
 ::: {.incremental}
+
+Importance of version control
 
 - **Lost track of changes** — Which script was the one that worked? Which draft had that result?
 - **Naming chaos** — `thesis_final_v2_FINAL.docx`, `analysis_old_backup.R`
@@ -44,6 +51,22 @@ Introduce yourself. Ask who has used Git before and who has not. No judgment —
 
 ::: {.notes}
 Emphasize: this is for you first — code, scripts, papers, any text-based work. Collaboration comes later.
+:::
+
+## Experiment with code — see the difference
+
+When you **try things** (new parameters, a different method, a refactor):
+
+- Git keeps a clear **before** (your last commit).
+- You can always see **exactly what changed** — `git diff` shows every line added or removed.
+- If the experiment goes wrong, you know precisely what to undo or revert to.
+
+No more "what did I change?" — the diff is the answer.
+
+![Small but important diff — e.g. a one-line fix or parameter change](imgs/diff-example.png){width=75%}
+
+::: {.notes}
+This is a big win for iterative work: try, compare, keep or discard.
 :::
 
 ## Why not Drive / shared folder / cluster only?
@@ -140,6 +163,28 @@ Use the **same email** as on GitHub/GitLab if you use them.
 
 ::: {.notes}
 Explain: every commit is signed with this name and email. No account needed for local-only Git.
+:::
+
+## New project: init or clone
+
+**Start from scratch** (new folder, new repo):
+
+```bash
+cd my-project
+git init
+```
+
+**Start from an existing repo** (e.g. GitHub, GitLab, a colleague’s copy):
+
+```bash
+git clone <url>   # e.g. https://github.com/user/repo.git
+```
+
+- `git init` — Git starts tracking the current folder; you make the first commit.
+- `git clone` — You get a full copy (history included); you’re ready to work and push back if there’s a remote.
+
+::: {.notes}
+Most workshops: start with init. In the lab you’ll often clone first (existing project), then branch and commit.
 :::
 
 ## Basic workflow — The loop
@@ -308,6 +353,42 @@ When you want a copy on a server (GitHub/GitLab) — for **backup** or later sha
 - **Pull** (if you use the same repo from another machine): `git pull`
 
 Today we focus on local workflow; remote is one short exercise at the end if time.
+
+## .gitignore — Keep noise and secrets out
+
+A **`.gitignore`** file in the repo root tells Git which files or folders **not** to track.
+
+**Why:** Avoid committing build outputs, large data, secrets, IDE/OS junk — and keep `git status` clean.
+
+**Example** (e.g. for R/Python + data):
+
+```gitignore
+# Data and outputs (large or machine-specific)
+data/
+outputs/
+*.csv
+
+# R
+.Rproj.user
+*.Rdata
+
+# Python
+__pycache__/
+*.pyc
+.env
+
+# OS / editor
+.DS_Store
+*.swp
+```
+
+Git will ignore these even if they’re in the folder. Add `.gitignore` early and commit it.
+
+- **Generate templates:** [gitignore.io](https://www.toptal.com/developers/gitignore) — create useful .gitignore files for your project (OS, IDEs, languages).
+
+::: {.notes}
+One line per pattern; use `*` for wildcards. No need to ignore files already tracked — remove from index first if you add them to .gitignore later.
+:::
 
 ## Hands-on: switch to the workshop
 

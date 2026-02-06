@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+/* All slide titles: Lato font, no uppercase */
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  font-family: Lato, "Helvetica Neue", Helvetica, sans-serif !important;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: none;
+}
+
+/* Title slide (main title) */
+.reveal .quarto-title-block h1.title {
+  font-family: Lato, "Helvetica Neue", Helvetica, sans-serif !important;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: none;
+}
