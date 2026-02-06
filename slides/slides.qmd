@@ -88,7 +88,7 @@ Drive is great for sharing files; it’s not built for “what changed and why.�
 - **Free**, works on your laptop, cluster, and server
 - **Standard** in research and software — papers, code, data pipelines
 - **Offline-first** — Commit locally, push to GitHub/GitLab later for backup or sharing
-- Today we focus on **you, one machine**; remote/backup is optional at the end
+- Today we focus on **you, one machine**; remote/backup is at the end
 
 :::
 
@@ -109,7 +109,7 @@ Drive is great for sharing files; it’s not built for “what changed and why.�
 ::: {.column width="50%"}
 
 - **Branch** — A parallel line of work (try ideas without touching main)
-- **Remote** — Optional copy on a server (backup or sharing)
+- **Remote** — copy on a server (backup or sharing)
 
 :::
 
@@ -387,7 +387,7 @@ Branches let you try ideas without touching the main line. We'll try this in the
 "checkout" is the old name; "switch" is clearer.
 :::
 
-## Remote & backup (optional)
+## Remote & backup
 
 When you want a copy on a server (GitHub/GitLab) — for **backup** or later sharing:
 
@@ -443,7 +443,7 @@ We'll do in order:
 2. First repo + first commit
 3. Basic workflow again (status, diff, add, commit)
 4. Branches
-5. Remote + push (optional, for backup)
+5. Remote + push (for backup and sharing)
 
 ::: {.notes}
 Give everyone a minute to open the file. Then start with "Setup" and do each block together.
@@ -460,6 +460,25 @@ Give everyone a minute to open the file. Then start with "Setup" and do each blo
 :::
 
 **Resources:** [git-scm.com/book](https://git-scm.com/book), [GitHub Docs](https://docs.github.com), [GitLab Docs](https://docs.gitlab.com)
+
+## Advanced topics (next steps)
+
+Things to learn when you're ready:
+
+- **Merge** — Bring a branch into another (`git merge`); fast-forward vs merge commit.
+- **Pull request (PR)** — Propose changes on GitHub/GitLab; review, discuss, then merge.
+- **Stash** — Save uncommitted work temporarily (`git stash` / `git stash pop`); switch context without committing.
+- **Conflicts** — When two branches change the same lines; resolve in the editor, then `git add` and finish merge/rebase.
+- **Rebase** — Replay your commits on top of another branch (`git rebase`); cleaner history, use with care on shared branches.
+- **Tags** — Mark a point in history (e.g. a release): `git tag v1.0`.
+- **Cherry-pick** — Apply one specific commit from another branch: `git cherry-pick <commit>`.
+- **Amend** — Fix the last commit: `git commit --amend` (message or add forgotten files).
+- **Reflog** — See where branches and HEAD have been: `git reflog`; helps recover “lost” commits.
+- **Blame** — See who changed each line in a file: `git blame <file>`.
+
+::: {.notes}
+Point people to the book and docs; suggest tackling one topic at a time when they hit a real need.
+:::
 
 ## Thank you — Questions?
 
