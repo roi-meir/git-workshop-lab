@@ -20,13 +20,18 @@ format:
 
 ## Welcome
 
-Git workshop for labmates
+Git workshop for labmates — we'll focus on a **single code writer** (the usual use case in our research).
 
 **Today:**
+
+::: {.incremental}
 
 - Why version control? (And why not just Drive or the cluster?)
 - Git basics: the daily workflow and key commands
 - Hands-on: we do it together on your machine
+- We'll keep it simple and not technical today.
+
+:::
 
 ::: {.notes}
 Introduce yourself. Ask who has used Git before and who has not. No judgment — we start from basics.
