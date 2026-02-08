@@ -20,7 +20,7 @@ format:
 
 ## Welcome - Git workshop for labmates 
 
-we'll focus on a **single** code writer.
+We'll focus on a **single** code writer.
 
 
 **Today:**
@@ -504,6 +504,7 @@ Give everyone a minute to open the file. Then start with "Setup" and do each blo
 **Start small.** Pick one project, commit at the end of the day, and move from there.
 :::
 :::
+
 ## Advanced topics (next steps)
 
 Things to learn when you're ready:
