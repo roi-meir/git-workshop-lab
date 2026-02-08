@@ -494,12 +494,16 @@ Give everyone a minute to open the file. Then start with "Setup" and do each blo
 
 - **Git** = version history for a folder; **commit** = snapshot with a message; **workflow:** `status` → `add` → `commit`.
 - **Key commands:** `git status`, `git add`, `git commit -m "..."`, `git log` / `git diff`; branches and remote when you need them.
-- **Next steps:** Use Git for one real project (code or paper); add a remote later for backup or sharing.
+- **Next steps:** Use Git for one real project (code or paper); add a remote for backup or sharing.
 
 :::
 
-**Resources:** [git-scm.com/book](https://git-scm.com/book), [GitHub Docs](https://docs.github.com), [GitLab Docs](https://docs.gitlab.com)
-
+::: {.fragment}
+::: {.callout-important}
+## Take-home message
+**Start small.** Pick one project, commit at the end of the day, and move from there.
+:::
+:::
 ## Advanced topics (next steps)
 
 Things to learn when you're ready:
@@ -510,6 +514,8 @@ Things to learn when you're ready:
 - **Conflicts** — When two branches change the same lines; resolve in the editor, then `git add` and finish merge/rebase.
 - **Tags** — Mark a point in history (e.g. a release): `git tag paper-initial-submission`.
 - **Bisect** — Find the commit that introduced a bug: `git bisect start` / `good` / `bad`; Git binary-searches history.
+
+**Resources:** [git-scm.com/book](https://git-scm.com/book), [GitHub Docs](https://docs.github.com)
 
 ::: {.notes}
 Point people to the book and docs; suggest tackling one topic at a time when they hit a real need.
