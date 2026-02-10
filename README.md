@@ -2,6 +2,8 @@
 
 A slide deck and hands-on workshop for labmates (PhD students from various fields), built with **Quarto + reveal.js**.
 
+**Live site:** [https://roi-meir.github.io/git-workshop-lab/](https://roi-meir.github.io/git-workshop-lab/) — slides, exercises.
+
 ## Prerequisites
 
 - [Quarto](https://quarto.org/docs/get-started/) installed
@@ -33,7 +35,6 @@ Outputs:
 
 ## Project layout
 
-- `PLAN.md` — Structure and outline of slides + workshop
 - `slides/slides.qmd` — Main presentation (reveal.js)
 - `workshop/exercises.qmd` — Step-by-step exercises (HTML)
 - `workshop/exercises/` — Optional split exercise files
