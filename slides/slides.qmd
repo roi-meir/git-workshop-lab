@@ -482,7 +482,9 @@ We'll do in order:
 2. First repo + first commit
 3. Basic workflow again (status, diff, add, commit)
 4. Branches
-5. Remote + push (for backup and sharing)
+5. SSH key + GitHub (optional — before remote)
+6. Remote + push (for backup and sharing)
+7. Collaboration (optional)
 
 ::: {.notes}
 Give everyone a minute to open the file. Then start with "Setup" and do each block together.

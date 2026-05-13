@@ -86,8 +86,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#part-2-first-repo-and-first-commit" id="toc-part-2-first-repo-and-first-commit" class="nav-link" data-scroll-target="#part-2-first-repo-and-first-commit">Part 2 — First repo and first commit</a></li>
   <li><a href="#part-3-basic-workflow-again" id="toc-part-3-basic-workflow-again" class="nav-link" data-scroll-target="#part-3-basic-workflow-again">Part 3 — Basic workflow again</a></li>
   <li><a href="#part-4-branches" id="toc-part-4-branches" class="nav-link" data-scroll-target="#part-4-branches">Part 4 — Branches</a></li>
-  <li><a href="#part-5-remote-and-push-optional" id="toc-part-5-remote-and-push-optional" class="nav-link" data-scroll-target="#part-5-remote-and-push-optional">Part 5 — Remote and push (optional)</a></li>
-  <li><a href="#part-6-simple-collaboration-pair-exercise-optional" id="toc-part-6-simple-collaboration-pair-exercise-optional" class="nav-link" data-scroll-target="#part-6-simple-collaboration-pair-exercise-optional">Part 6 — Simple collaboration (pair exercise, optional)</a></li>
+  <li><a href="#part-5-ssh-key-and-github-optional" id="toc-part-5-ssh-key-and-github-optional" class="nav-link" data-scroll-target="#part-5-ssh-key-and-github-optional">Part 5 — SSH key and GitHub (optional)</a></li>
+  <li><a href="#part-6-remote-and-push-optional" id="toc-part-6-remote-and-push-optional" class="nav-link" data-scroll-target="#part-6-remote-and-push-optional">Part 6 — Remote and push (optional)</a></li>
+  <li><a href="#part-7-simple-collaboration-pair-exercise-optional" id="toc-part-7-simple-collaboration-pair-exercise-optional" class="nav-link" data-scroll-target="#part-7-simple-collaboration-pair-exercise-optional">Part 7 — Simple collaboration (pair exercise, optional)</a></li>
   <li><a href="#done" id="toc-done" class="nav-link" data-scroll-target="#done">Done</a></li>
   </ul>
 </nav>
@@ -236,21 +237,100 @@ Note
 <p><strong>6. (Optional) Push to remote</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="part-5-remote-and-push-optional" class="level1">
-<h1>Part 5 — Remote and push (optional)</h1>
+<section id="part-5-ssh-key-and-github-optional" class="level1">
+<h1>Part 5 — SSH key and GitHub (optional)</h1>
+<p>Use <strong>SSH</strong> so you can <code>git push</code> / <code>git pull</code> without typing a password or personal access token each time. Skip this part if you are happy using <strong>HTTPS</strong> and GitHub’s browser login or a token.</p>
+<p><strong>1. Check for an existing key</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-al</span> ~/.ssh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If you see <code>id_ed25519</code> and <code>id_ed25519.pub</code> (or <code>id_rsa</code> / <code>id_rsa.pub</code>), you may already have a key. You can reuse it or create a new one with a different file name (step 2).</p>
+<p><strong>2. Generate a new SSH key (recommended: Ed25519)</strong></p>
+<p>Replace the email with the one you use on GitHub:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-t</span> ed25519 <span class="at">-C</span> <span class="st">"your.email@example.com"</span> <span class="at">-f</span> ~/.ssh/id_ed25519</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Press <strong>Enter</strong> to accept the default path (if you used <code>-f</code> as above, it saves to <code>~/.ssh/id_ed25519</code>).</li>
+<li>Optionally set a <strong>passphrase</strong> (recommended): protects the key if someone copies your laptop.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Windows
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use <strong>Git Bash</strong> for these commands. The path <code>~/.ssh</code> is under your user folder, e.g.&nbsp;<code>C:\Users\YourName\.ssh</code>.</p>
+</div>
+</div>
+<p><strong>3. Start the agent and add the key (macOS / Linux)</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">eval</span> <span class="st">"</span><span class="va">$(</span><span class="fu">ssh-agent</span> <span class="at">-s</span><span class="va">)</span><span class="st">"</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-add</span> ~/.ssh/id_ed25519</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>On <strong>macOS</strong> (Apple Silicon / recent macOS), you may use:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-add</span> <span class="at">--apple-use-keychain</span> ~/.ssh/id_ed25519</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>so the passphrase is stored in the keychain (first time only).</p>
+<p>On <strong>Windows (Git Bash)</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">eval</span> <span class="st">"</span><span class="va">$(</span><span class="fu">ssh-agent</span> <span class="at">-s</span><span class="va">)</span><span class="st">"</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-add</span> ~/.ssh/id_ed25519</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>4. Copy the public key</strong></p>
+<p>The file ending in <code>.pub</code> is safe to share; never share the private key (no <code>.pub</code>).</p>
+<ul>
+<li><strong>macOS:</strong> <code>pbcopy &lt; ~/.ssh/id_ed25519.pub</code> then paste in GitHub (next step).</li>
+<li><strong>Linux:</strong> <code>cat ~/.ssh/id_ed25519.pub</code> and copy the whole line.</li>
+<li><strong>Windows (Git Bash):</strong> <code>cat ~/.ssh/id_ed25519.pub</code> and copy the line, or <code>clip &lt; ~/.ssh/id_ed25519.pub</code> if <code>clip</code> works in your shell.</li>
+</ul>
+<p><strong>5. Add the key on GitHub</strong></p>
+<ol type="1">
+<li>Log in to GitHub → click your avatar → <strong>Settings</strong>.</li>
+<li>In the left sidebar: <strong>SSH and GPG keys</strong>.</li>
+<li><strong>New SSH key</strong> — give it a title (e.g.&nbsp;“Lab laptop”), paste the public key, save.</li>
+</ol>
+<p>Official guide: <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh">Connecting to GitHub with SSH</a>.</p>
+<p><strong>6. Test the connection</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-T</span> git@github.com</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The first time, type <code>yes</code> if asked to trust the host. You should see a message like: <em>Hi username! You’ve successfully authenticated…</em></p>
+<p><strong>7. Use SSH with your repo</strong></p>
+<p>When you add a remote (Part 6), use the <strong>SSH</strong> URL from the green <strong>Code</strong> button on GitHub, for example:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin git@github.com:yourname/my-first-repo.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If you already added <code>origin</code> with HTTPS, change it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote set-url origin git@github.com:yourname/my-first-repo.git</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote <span class="at">-v</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Then <code>git push</code> uses SSH.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>HTTPS with a <strong>personal access token</strong> is another valid option; SSH avoids managing tokens for every push on the command line.</p>
+</div>
+</div>
+</section>
+<section id="part-6-remote-and-push-optional" class="level1">
+<h1>Part 6 — Remote and push (optional)</h1>
 <p>Put your repo on GitHub or GitLab so you can push and pull. Do this part only if you have time and an account.</p>
 <p><strong>1. Create a new repo on the website</strong></p>
 <ul>
 <li>GitHub: <a href="https://github.com/new">github.com/new</a> — create an <strong>empty</strong> repo (no README, no .gitignore).</li>
 <li>GitLab: New project → <strong>Create blank project</strong>.</li>
 </ul>
-<p><strong>2. Copy the repo URL</strong> (HTTPS is fine), e.g.&nbsp;<code>https://github.com/yourname/my-first-repo.git</code></p>
+<p><strong>2. Copy the repo URL</strong></p>
+<ul>
+<li><strong>HTTPS:</strong> e.g.&nbsp;<code>https://github.com/yourname/my-first-repo.git</code> (browser or token login when you push).</li>
+<li><strong>SSH:</strong> e.g.&nbsp;<code>git@github.com:yourname/my-first-repo.git</code> (if you completed Part 5).</li>
+</ul>
 <p><strong>3. Add the remote</strong> (use your URL)</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://github.com/yourname/my-first-repo.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://github.com/yourname/my-first-repo.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Or with SSH:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin git@github.com:yourname/my-first-repo.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>4. Push your branch</strong> (first time we set upstream)</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-M</span> main</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>You may be asked to log in (browser or token). After that, refresh the repo page — you should see your files.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-M</span> main</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>With HTTPS you may be asked to log in (browser or token). With SSH, Git uses your key. After a successful push, refresh the repo page — you should see your files.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -265,8 +345,8 @@ Warning
 </div>
 </div>
 </section>
-<section id="part-6-simple-collaboration-pair-exercise-optional" class="level1">
-<h1>Part 6 — Simple collaboration (pair exercise, optional)</h1>
+<section id="part-7-simple-collaboration-pair-exercise-optional" class="level1">
+<h1>Part 7 — Simple collaboration (pair exercise, optional)</h1>
 <p>One person pushes a change; the other pulls and edits the same file, then we resolve a small conflict.</p>
 <p><strong>Setup:</strong> Person A and Person B. Both have access to the same repo (e.g.&nbsp;A owns it, B is collaborator, or use one shared repo).</p>
 <p><strong>Step 1 — Person A</strong></p>
@@ -274,35 +354,35 @@ Warning
 <li>Add a line to <code>README.md</code>, e.g.&nbsp;“Contributors: Alice”</li>
 <li>Commit and push:</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add README.md</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add contributor Alice"</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add README.md</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add contributor Alice"</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Step 2 — Person B</strong></p>
 <ul>
 <li><strong>Pull first</strong> (to get A’s commit):</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li>Edit <code>README.md</code> and add a line, e.g.&nbsp;“Contributors: Alice, Bob”</li>
 <li>Commit and push:</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add README.md</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add contributor Bob"</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add README.md</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add contributor Bob"</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Step 3 — Person A</strong></p>
 <ul>
 <li>Pull to get B’s commit:</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>No conflict if you edited different lines. If both edited the same line, Git will ask you to resolve a conflict (see below).</p>
 <p><strong>Optional — Trigger a conflict on purpose</strong></p>
 <ul>
 <li>A and B both add a line at the <strong>same place</strong> in <code>README.md</code>, then A pushes, B pulls, B adds their line, commits, and pushes. When A runs <code>git pull</code>, Git may report a conflict.</li>
 <li>Open the file: you’ll see conflict markers <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>. Edit the file to keep what you want, remove the markers, then:</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add README.md</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Resolve conflict in README"</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add README.md</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Resolve conflict in README"</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -319,7 +399,7 @@ Important
 </section>
 <section id="done" class="level1">
 <h1>Done</h1>
-<p>You’ve done: setup, first commit, basic workflow (status, diff, add, commit), branches + merge, and (optionally) remote + push and pull/conflict resolution.</p>
+<p>You’ve done: setup, first commit, basic workflow (status, diff, add, commit), branches + merge, and (optionally) SSH + GitHub, remote + push, and pull/conflict resolution.</p>
 <p><strong>Next:</strong> Use Git for one real project (code or paper). Try opening a Pull Request on GitHub or Merge Request on GitLab for a change on a branch.</p>
 </section>
 

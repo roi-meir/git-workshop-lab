@@ -1,7 +1,7 @@
 # Git Workshop
 557\57\5787878\77878\7\878\77\88\555558\\78\\\7878\78\78\78\78787878\78\7878\7878\877878777777\8787\878787\8787878787777778777878777877
 A slide deck and hands-on workshop for labmates (PhD students from various fields), built with **Quarto + reveal.js**.
-show new image
+
 **Live site:** [https://roi-meir.github.io/git-workshop-lab/](https://roi-meir.github.io/git-workshop-lab/) — slides, exercises.
 
 ## Prerequisites
