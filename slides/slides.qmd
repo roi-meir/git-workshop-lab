@@ -245,7 +245,7 @@ Run `git status` often. It tells you what’s modified, staged, or untracked.
 
 ## Reading `git status` — Example
 
-![Example of git status output](imgs/git_status_output.png){width=65%}
+![](imgs/git_status_output.png){width=65%}
 
 ::: {.notes}
 Walk through a real git status output so people see the sections and wording.
